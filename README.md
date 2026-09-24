@@ -4,7 +4,7 @@
 
 This project analyzes **Online Retail transaction data** to identify sales trends, customer behavior, product performance, returns, and geographic revenue patterns.
 
-The project follows an end-to-end **Data Analytics workflow**, covering data cleaning, SQL analysis, Python exploratory analysis, and Power BI visualization.
+The project follows an end-to-end **Data Analytics workflow**, covering data cleaning, SQL analysis, Python exploratory analysis, and Power BI visualization, R Programming.
 
 ### Project Status
 
@@ -121,7 +121,7 @@ The SQL analysis and findings are documented in:
 
 ---
 
-# 3️  Python Analysis — Pandas 🟡
+# 3️  Python Analysis — Pandas 
 
 Python is being used for **Exploratory Data Analysis (EDA)** and analytical validation.
 
