@@ -314,3 +314,185 @@ After that:
 * Final business insights
 * SQL project documentation
 
+## CUSTOMER LEVEL ANALYSIS
+
+## Customer Analysis
+
+### Q16. Top 10 Customers by Revenue
+
+```sql
+SELECT customer_id,SUM(Quantity*Price) AS revenue
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+ORDER BY revenue DESC
+LIMIT 10;
+```
+
+Shows the customers who generated the highest revenue.
+
+### Q17. Top 10 Customers by Total Quantity
+
+```sql
+SELECT customer_id,SUM(Quantity) AS total_quantity
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+ORDER BY total_quantity DESC
+LIMIT 10;
+```
+
+Shows the customers who purchased the highest number of units.
+
+### Q18. Top 10 Customers by Transaction Count
+
+```sql
+SELECT customer_id,COUNT(*) AS transaction_count
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+ORDER BY transaction_count DESC
+LIMIT 10;
+```
+
+Shows the customers with the highest number of transactions.
+
+### Q19. Average Transaction Value by Customer
+
+```sql
+SELECT customer_id,AVG(Quantity*Price) AS avg_transaction_value
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+ORDER BY avg_transaction_value DESC
+LIMIT 10;
+```
+
+Shows customers with the highest average transaction value.
+
+### Q20. High-Value and Frequent Customers
+
+```sql
+SELECT customer_id,COUNT(*) AS transaction_count,SUM(Quantity*Price) AS revenue
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+HAVING COUNT(*)>=500
+ORDER BY revenue DESC
+LIMIT 10;
+```
+
+Used a minimum of 500 transactions to focus on customers with enough transaction history.
+
+### Q21. Top 10 Customers by Return Transactions
+
+```sql
+SELECT customer_id,COUNT(*) AS return_transactions
+FROM retail_data
+WHERE customer_id IS NOT NULL
+AND Transaction_Type='Returns'
+GROUP BY customer_id
+ORDER BY return_transactions DESC
+LIMIT 10;
+```
+
+Shows the customers with the highest number of return transactions.
+
+### Q22. Customer Return Rate
+
+```sql
+SELECT customer_id,COUNT(*) AS total_transactions,
+SUM(CASE WHEN Transaction_Type='Returns' THEN 1 ELSE 0 END) AS return_transactions,
+ROUND(SUM(CASE WHEN Transaction_Type='Returns' THEN 1 ELSE 0 END)*100.0/COUNT(*),2) AS return_rate
+FROM retail_data
+WHERE customer_id IS NOT NULL
+GROUP BY customer_id
+HAVING COUNT(*)>=20
+ORDER BY return_rate DESC
+LIMIT 10;
+```
+
+Customers with fewer than 20 transactions were excluded so that very small transaction histories do not distort the return rate.
+## Product Analysis
+
+### Q23. Top 10 Products by Revenue
+
+```sql
+SELECT Description,SUM(Quantity*Price) AS revenue
+FROM products_df
+GROUP BY Description
+ORDER BY revenue DESC
+LIMIT 10;
+```
+
+This shows the products that generated the highest revenue.
+
+### Q24. Top 10 Products by Quantity Sold
+
+```sql
+SELECT Description,SUM(Quantity) AS total_quantity
+FROM products_df
+GROUP BY Description
+ORDER BY total_quantity DESC
+LIMIT 10;
+```
+
+This shows the products with the highest total quantity sold.
+
+### Q25. Top 10 Products by Transaction Count
+
+```sql
+SELECT Description,COUNT(*) AS transaction_count
+FROM products_df
+GROUP BY Description
+ORDER BY transaction_count DESC
+LIMIT 10;
+```
+
+This shows the products that appeared in the highest number of transactions.
+
+### Q26. Average Selling Price by Product
+
+```sql
+SELECT Description,AVG(Price) AS avg_price
+FROM products_df
+GROUP BY Description
+ORDER BY avg_price DESC
+LIMIT 10;
+```
+
+This shows the products with the highest average selling price.
+
+### Q27. Products with the Highest Return Quantity
+
+```sql
+SELECT Description,SUM(Quantity) AS returned_quantity
+FROM products_df
+WHERE Transaction_Type='Returns'
+GROUP BY Description
+ORDER BY returned_quantity ASC
+LIMIT 10;
+```
+
+Returned quantities are negative in the dataset, so ascending order shows the products with the largest number of returned units.
+
+### Q28. Products with the Highest Net Revenue Loss
+
+```sql
+SELECT Description,SUM(Quantity*Price) AS revenue
+FROM products_df
+GROUP BY Description
+HAVING revenue<0
+ORDER BY revenue ASC
+LIMIT 10;
+
+```
+This identifies products where the value of returns is greater than the revenue generated from sales.
+
+### Q29. Top Products by Revenue and Quantity
+```sql
+SELECT Description,SUM(Quantity) AS total_quantity,SUM(Quantity*Price) AS revenue
+FROM products_df GROUP BY Description ORDER BY revenue DESC LIMIT 10;
+
+```
+This combines quantity sold and revenue to see which products have strong overall sales performance.
