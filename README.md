@@ -8,12 +8,12 @@ The project follows an end-to-end **Data Analytics workflow**, covering data cle
 
 ### Project Status
 
-* ✅ Data Cleaning — Excel
-* ✅ SQL Analysis — MySQL
-* 🟡 Python EDA — In Progress
-* ✅ Power BI Dashboard
-* ✅ Business Insights & Documentation
-* 🟡 GitHub Portfolio — In Progress
+ ✅ Data Cleaning — Excel
+ ✅ SQL Analysis — MySQL
+ ✅ Python EDA — Pandas
+ ✅ Power BI Dashboard
+ ✅ Business Insights & Documentation
+ ✅ GitHub Portfolio — Updated
 
 ---
 
@@ -21,14 +21,14 @@ The project follows an end-to-end **Data Analytics workflow**, covering data cle
 
 The objective of this project is to answer practical business questions such as:
 
-* Which countries generate the most revenue?
-* Which products contribute the most to sales?
-* How does revenue change over time?
-* Who are the highest-value customers?
-* What percentage of transactions are cancelled or returned?
-* How do registered and guest customers differ?
-* Which products and countries require further attention?
-* What patterns can help support better business decisions?
+ Which countries generate the most revenue?
+ Which products contribute the most to sales?
+ How does revenue change over time?
+ Who are the highest-value customers?
+ What percentage of transactions are cancelled or returned?
+ How do registered and guest customers differ?
+ Which products and countries require further attention?
+ What patterns can help support better business decisions?
 
 ---
 
@@ -79,22 +79,22 @@ The raw Online Retail II dataset was inspected and cleaned using Microsoft Excel
 
 The following issues were investigated:
 
-* Missing Customer IDs
-* Duplicate records
-* Negative quantities
-* Zero-price transactions
-* Blank product descriptions
-* Cancelled invoices
-* Unusual/adjustment transactions
-* Data consistency across the two yearly datasets
+ Missing Customer IDs
+ Duplicate records
+ Negative quantities
+ Zero-price transactions
+ Blank product descriptions
+ Cancelled invoices
+ Unusual/adjustment transactions
+ Data consistency across the two yearly datasets
 
 ### Cleaning Work
 
-* Identified and handled duplicate records
-* Investigated missing values
-* Separated transaction types
-* Checked unusual prices and quantities
-* Prepared cleaned datasets for SQL and further analysis
+  Identified and handled duplicate records
+  Investigated missing values
+  Separated transaction types
+  Checked unusual prices and quantities
+  Prepared cleaned datasets for SQL and further analysis
 
 ---
 
@@ -104,69 +104,77 @@ The cleaned datasets were imported into **MySQL** for structured business analys
 
 ### SQL Analysis Includes
 
-* Revenue analysis
-* Sales by country
-* Product performance
-* Customer analysis
-* Monthly sales trends
-* Transaction analysis
-* Returns/cancellations analysis
-* Customer type analysis
-* Aggregations and ranking
-* Business-focused SQL queries
+ Revenue analysis
+ Sales by country
+ Product performance
+ Customer analysis
+ Monthly sales trends
+ Transaction analysis
+ Returns/cancellations analysis
+ Customer type analysis
+ Aggregations and ranking
+ Business-focused SQL queries
 
-The SQL analysis and findings are documented in:
+The SQL analysis contains **35 business-focused queries** covering the main analysis areas.
+
+The SQL queries and findings are documented in:
+
+`3_SQL/sql_queries.sql`
 
 `7_Documentation/SQL_Analysis_Report.md`
 
 ---
 
-# 3️  Python Analysis — Pandas 
+# 3️ Python Analysis — Pandas
 
-Python is being used for **Exploratory Data Analysis (EDA)** and analytical validation.
+Python was used for **Exploratory Data Analysis (EDA)** and analytical validation.
 
-### Current Python Work
+### Completed Python Work
 
-* Data loading
-* Data inspection
-* Data cleaning validation
-* Date/time handling
-* GroupBy analysis
-* Revenue calculations
-* Quantity analysis
-* Customer analysis
-* Country-level analysis
-* Monthly analysis
-* Data visualization
+ Data loading
+ Data inspection
+ Missing-value analysis
+ Duplicate checking
+ Data quality analysis
+ Revenue calculations
+ Transaction classification
+ Return analysis
+ Customer analysis
+ Country-level analysis
+ Product analysis
+ Monthly analysis
+ GroupBy and aggregation
+ Sorting and ranking
+ Basic data visualization
+
+During the analysis, non-product records such as bank charges, postage, fees, adjustments, discounts and commissions were identified and separated from product-level analysis.
 
 ### Completed Python Visualization
 
-A country-level revenue analysis has been created to identify the countries contributing the highest revenue.
+A country-level revenue analysis was created to identify the countries contributing the highest revenue.
 
 ### Python Tools
 
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-
-> Python EDA is currently being expanded with additional business questions, visualizations, and insights.
+ Python
+ Pandas
+ NumPy
+ Matplotlib
 
 ---
 
-# 4️  Power BI Dashboard
+# 4️ Power BI Dashboard
 
 An interactive Power BI dashboard was created to provide a visual overview of the e-commerce business.
 
 ### Dashboard Focus
 
-* Revenue
-* Sales trends
-* Product performance
-* Country performance
-* Customer analysis
-* Transaction analysis
-* Returns/cancellations
+ Revenue
+ Sales trends
+ Product performance
+ Country performance
+ Customer analysis
+ Transaction analysis
+ Returns/cancellations
 
 The final dashboard export is available in:
 
@@ -176,52 +184,60 @@ The final dashboard export is available in:
 
 # Key Business Insights
 
-The analysis identified several important patterns:
+The analysis identified several important patterns.
 
 ### Geographic Performance
 
-The **United Kingdom** generates the highest revenue among the countries analyzed, followed by other major European markets.
+The **United Kingdom** generated the highest revenue, with around **16.33 million** out of the total revenue of approximately **19.23 million**.
 
 ### Customer Contribution
 
-Registered customers contribute the majority of revenue compared with guest transactions.
+Registered customers generated around **16.59 million** in revenue, compared with around **2.64 million** from guest customers.
 
-### Time Trends
+### Valuable Customers
 
-Revenue shows noticeable variation across months, with stronger sales activity during parts of the year, including the November–December period.
+Customer **18102** was the highest-revenue customer at around **598K**, followed by customer **14646** at around **523K**.
 
-### Product Concentration
+### Product Performance
 
-A relatively small group of products contributes a significant portion of overall sales.
+**REGENCY CAKESTAND 3 TIER** was the highest-revenue product at around **327K**. Other high-revenue products included WHITE HANGING HEART T-LIGHT HOLDER, JUMBO BAG RED RETROSPOT, PARTY BUNTING and ASSORTED COLOUR BIRD ORNAMENT.
 
 ### Cancellations & Returns
 
-Cancelled/returned transactions represent a meaningful part of the transaction data and were analyzed separately from completed sales.
+The dataset contained **22,889 return transactions** after handling records with missing quantities. The total returned quantity was around **1.06 million units**.
 
-> These findings are based on the cleaned transaction dataset and are intended to support business-focused analysis rather than simply describe the dataset.
+### Non-Product Records
+
+Several descriptions were identified as non-product transactions, including Bank Charges, Postage, Amazon Fee, Manual, Discount, Commission, Samples and Adjust bad debt. These were separated when performing product-level analysis.
+
+### Time Trends
+
+Revenue varied considerably across months. **November 2011** had the highest monthly revenue at around **1.46 million**, while **December 2011** was around **433K** in the final monthly analysis.
 
 ---
 
-#  Data Quality Findings
+# Data Quality Findings
 
 During the project, several data-quality challenges were identified:
 
-* Missing Customer IDs
-* Duplicate transactions
-* Negative quantities
-* Zero-price records
-* Blank descriptions
-* Cancelled invoices
-* Unusual/adjustment transactions
+ Missing Customer IDs
+ Duplicate transactions
+ Negative quantities
+ Zero-price records
+ Blank descriptions
+ Cancelled invoices
+ Unusual/adjustment transactions
+ Non-product financial and operational records
 
-These issues were investigated before performing the major analytical tasks.
+These issues were investigated during the Excel and Python stages before performing the main business analysis.
 
 ---
 
-#  Project Structure
+# Project Structure
 
 ```text
 Global-Ecommerce-Analytics/
+
 │
 ├── 1_Raw_Dataset/
 │   └── online_retail_II.xlsx
@@ -231,9 +247,10 @@ Global-Ecommerce-Analytics/
 │   └── online_retail_cleaning.xlsx
 │
 ├── 3_SQL/
-│   └── data/
-│       ├── online_retail_cleaning-2009-2010.csv
-│       └── online_retail_cleaning-2010-2011.csv
+│   ├── data/
+│   │   ├── online_retail_cleaning-2009-2010.csv
+│   │   └── online_retail_cleaning-2010-2011.csv
+│   └── sql_queries.sql
 │
 ├── 4_Python/
 │   ├── analysis.ipynb
@@ -270,14 +287,13 @@ Global-Ecommerce-Analytics/
 
 The project can be extended with:
 
-* Additional Python visualizations
-* Customer segmentation
-* RFM analysis
-* Customer lifetime value analysis
-* Product-level profitability analysis
-* Sales forecasting
-* Advanced Power BI/DAX analysis
-* Automated data pipeline
+ Customer segmentation
+ RFM analysis
+ Customer lifetime value analysis
+ Product-level profitability analysis
+ Sales forecasting
+ Advanced Power BI/DAX analysis
+ Automated data pipeline
 
 ---
 
@@ -285,17 +301,17 @@ The project can be extended with:
 
 This project demonstrates practical experience in:
 
-* Data Cleaning
-* Exploratory Data Analysis
-* SQL
-* Python/Pandas
-* Data Visualization
-* Power BI
-* Business Analysis
-* Data Quality Analysis
-* Customer & Sales Analysis
-* Business Insight Generation
-* Git & GitHub
+ Data Cleaning
+ Exploratory Data Analysis
+ SQL
+ Python/Pandas
+ Data Visualization
+ Power BI
+ Business Analysis
+ Data Quality Analysis
+ Customer & Sales Analysis
+ Business Insight Generation
+ Git & GitHub
 
 ---
 
@@ -303,7 +319,7 @@ This project demonstrates practical experience in:
 
 **Oggu Harish**
 
-Aspiring Data Analyst | Python | SQL | Excel | Power BI | R Programming | Git & GitHub | 
+Aspiring Data Analyst | Python | SQL | Excel | Power BI | R Programming | Git & GitHub
 
 ---
 
@@ -311,4 +327,16 @@ Aspiring Data Analyst | Python | SQL | Excel | Power BI | R Programming | Git & 
 
 **Active Portfolio Project**
 
-The core Excel, SQL, Power BI, and documentation work has been completed. Python exploratory analysis is currently being expanded with additional business questions, visualizations, and insights.
+### Project Status
+
+Data Cleaning — Completed
+
+SQL Analysis — Completed
+
+Python EDA — Completed
+
+Power BI Dashboard — Completed
+
+Business Insights & Documentation — Completed
+
+GitHub Portfolio — Updated
