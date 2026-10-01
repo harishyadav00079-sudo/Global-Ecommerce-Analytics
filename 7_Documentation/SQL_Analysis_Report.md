@@ -496,3 +496,68 @@ FROM products_df GROUP BY Description ORDER BY revenue DESC LIMIT 10;
 
 ```
 This combines quantity sold and revenue to see which products have strong overall sales performance.
+
+### Q30. Monthly Revenue
+```sql
+SELECT DATE_FORMAT(InvoiceDate,'%Y-%m') AS month,
+SUM(Quantity*Price) AS Revenue
+FROM retail_data
+WHERE Transaction_Type = "Sale"
+Group By month
+Order By month;
+
+```
+This shows the Monthly Revenue which is used for seeing which month got Highest 
+and Lowest.
+
+### Q31. Monthly Transaction Counts
+
+```sql
+SELECT DATE_FORMAT(InvoiceDate,'%Y-%m') AS month,
+COUNT(*) AS transaction_count
+FROM retail_data
+GROUP BY month
+ORDER BY month;
+
+``` 
+This Identifies how many transactions are taking place in each month and can Identity which one possesses Highest and Lowest Transactions Monthly.
+
+### Q32. Montly Quantity
+```sql
+SELECT DATE_FORMAT(InvoiceDate,'%Y-%m') AS month,
+SUM(Quantity) AS total_quantity
+FROM retail_data
+WHERE Transaction_Type='Sale'
+GROUP BY month
+ORDER BY month;
+
+```
+It generates the total quantity i.e., no.of units for every month
+
+### Q33. Average Monthly Revenue
+
+```sql
+SELECT DATE_FORMAT(InvoiceDate,'%Y-%m') AS month,
+ROUND(AVG(Quantity*Price),2) AS avg_revenue
+FROM retail_data
+WHERE Transaction_Type = "Sale"
+Group By month
+Order By month;
+
+``` 
+It shows the Average revenue generated for each months
+
+### Q34. Monthly Return Analysis
+
+```sql
+SELECT DTAE_FORMAT(InvoiceDate,'%Y-%m') AS month,
+COUNT(*) AS return_count,
+SUM(Quantity) AS Return_Quantity,
+SUM(Quantity * Price) AS return_revenue
+FROM retail_data
+WHERE Transaction_Type = "Returns"
+GROUP BY month
+ORDER BY month
+
+```
+This Identifies returned quantity, return revenue and returned no.of units
